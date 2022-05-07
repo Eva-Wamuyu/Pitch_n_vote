@@ -1,6 +1,8 @@
 import email
+import datetime
 from flask_sqlalchemy import SQLAlchemy
 from . import db
+
 
 class User(db.Model):
   __tablename__ = 'all_users'
