@@ -19,11 +19,17 @@ class SignupForm(FlaskForm):
   password_two = PasswordField('Confirm Password', validators=[InputRequired()])
   submit = SubmitField('Sign Up')
 
+  def validate_email(self,data_field):
+            if User.query.filter_by(email =data_field.data).first():
+                raise ValidationError('There is an account with that email')
 
+  def validate_username(self,data_field):
+        if User.query.filter_by(username = data_field.data).first():
+            raise ValidationError('That username is taken')
   
 
 
 class PostForm(FlaskForm):
   post = TextAreaField("What's in your mind?", validators=[DataRequired(), Length(min=15, message="Share a message longer than 15 characters")])
-  category = RadioField("Category",choices=[("Tech","Technology"),("Agri","Agriculture"),("Edu","Education")], validators=[DataRequired()])
+  category = RadioField("Category",choices=[("Tech","Technology"),("Agr","Agriculture"),("Edu","Education")], validators=[DataRequired()])
   submit = SubmitField('Share')
