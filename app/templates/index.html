@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macros%}
+
+{% block main %}
+<h2 class="text-center">
+  {{header}}
+</h2>
+<div class="container">
+
+{{macros.display(all_posts)}}
+
+</div>  
+{% endblock %}

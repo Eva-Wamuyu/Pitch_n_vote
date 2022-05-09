@@ -4,19 +4,16 @@
 
 {% block main %}
 <div class="container">
-
-
    <h2>{{form_title}}</h2>
    <div class="form">
     {{wtform.quick_form(form)}}
-   
    </div>
-   <p>
-    Have an account?
-      <a href="{{url_for('app_bp.login')}}">Log in </a>
-    </p>
+<p>
+New here?
+  <a href="{{url_for('app_bp.signUp')}}">sign up</a>
+</p>
 
-   
+
 </div>
   
 {% endblock %}

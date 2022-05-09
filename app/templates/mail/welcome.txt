@@ -1,0 +1,4 @@
+{{user.username}}
+
+Someone (hopefully you) has created an account with us.
+Welcome to pitch n vote

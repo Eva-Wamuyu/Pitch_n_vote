@@ -1,22 +1,17 @@
 {% extends 'base.html' %}
-
 {% import 'bootstrap/wtf.html' as wtform%}
 
 {% block main %}
 <div class="container">
-
-
-   <h2>{{form_title}}</h2>
+   <h3>
+      Your thoughts on this?
+   </h3>
+   <p>
+      {{post_spec.content}}
+   </p>
    <div class="form">
     {{wtform.quick_form(form)}}
-   
    </div>
-   <p>
-    Have an account?
-      <a href="{{url_for('app_bp.login')}}">Log in </a>
-    </p>
-
-   
 </div>
   
 {% endblock %}
