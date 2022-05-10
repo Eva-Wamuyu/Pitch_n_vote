@@ -17,32 +17,43 @@
         {{post.get_author(post.author_id)}}
     </h3>
     <p>
+      at: {{post.the_date}}
+    </p>
+    <p>
       Category:
     <span>
-      {{post.category}}
+  
+        {{post.category}}
+    
+      
     </span>
     </p>
    <p>
      {{post.content}}
    </p>
    <p>
-     <button>
-      <span>Upvote</span>
-     </button>
+    <span> {{post.votes}} votes </span>
      
-     <span> {{post.votes}} votes </span>
-     <span>Downvote</span>
-     <div>
+    
+     <div class="posts">
      
        {% if post.get_comments(post._id) %}
-       <p class="text-decoration-underline" >
-        Comments:
-      </p>
-       
+       <h6>Comments</h6>
+        <div class="comment" >
           {% for comment in post.get_comments(post._id) %}
-          <p> 
+
+          <div class="ms-5 border-bottom">
+          <p class="commentor" style="color:blue">
+            <i class="fa fa-clock"></i> {{comment.the_date}}
+              <br>
+            @{{comment.get_author(comment.author)}}  says:
+          </p>
+          <p class="text-inf"> 
             {{comment.content}}
           </p>
+         
+          </div>
+        
          
           {%endfor%}
          
@@ -52,14 +63,17 @@
           No comments
         </p>
         {% endif %}
+        </div>
         
    </div>
      <p>
-       <a href="{{url_for('app_bp.post_comment', post=post._id)}}">Comment</a>
+       <a class="btn border-info" href="{{url_for('app_bp.post_comment', post=post._id)}}">  <i class="fa fa-plus"></i> Add a comment</a>
      </p>
    </p>
-  </div>
+ 
+  <hr>
   {%endfor %}
+</div>
 </div>
 {%else%}
 <div>

@@ -4,16 +4,24 @@
 
 
 {% block nav %}
-<div class="topnav sticky-top" id="myTopnav">
-  <a href="{{url_for('app_bp.index')}}" class="active">Home</a>
+
   
-  <a href="#sub">Pitch</a>
-  <a href="{{url_for('app_bp.logout')}}">Logout</a>
-  <a href="javascript:void(0);" class="icon" onclick="toggleFunct()">
-    <i class="fa fa-bars"></i>
-  </a>
-  
-</div>
+<nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">PitchnVote</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="#sub">Pitch</a>
+        <a class="nav-link" href="{{url_for('app_bp.logout')}}">Logout</a>
+        
+      </div>
+    </div>
+  </div>
+</nav>
+
 {% endblock %}
 
 
@@ -22,11 +30,16 @@
 
 
 {% block main %}
+
+
+
+
+
 <div class="container">
 
 <div class="profile text-center">
   <div class="avatars">
-    <img class="avatar" src="../static/assets/defaultavat.png" width="120px" alt="default">
+    <img class="avatar bg-dark rounded-circle" src="../static/assets/default.png" width="120px" height="120px" alt="default">
   </div>
 <h2>
   <small>
@@ -40,6 +53,7 @@
   
 {% if posts  %}
 <div class="container">
+  <h3>Your Pitches</h3>
   {% for post in posts%}
   <div>
     <p>
@@ -51,25 +65,26 @@
    <p>
      {{post.content}}
    </p>
-   <p>
-     <button>
-      <span>Upvote</span>
-     </button>
-     
+   <p> 
      <span> {{post.votes}} votes </span>
-     <span>Downvote</span>
      <div>
      
        {% if post.get_comments(post._id) %}
+       <div class="ms-5" >
        <p class="text-decoration-underline" >
         Comments:
       </p>
        
           {% for comment in post.get_comments(post._id) %}
+           <div class="border-bottom">
+            <p class="commentor" style="color:blue">
+              {{comment.get_author(comment.author)}} says:
+            </p>
+          
           <p> 
             {{comment.content}}
           </p>
-         
+           </div>
           {%endfor%}
          
         {% else%}
@@ -77,10 +92,10 @@
           No comments
         </p>
         {% endif %}
-        
+      </div>
    </div>
      <p>
-       <a href="{{url_for('app_bp.post_comment', post=post._id)}}">Comment</a>
+       <a class="btn" href="{{url_for('app_bp.post_comment', post=post._id)}}">Reply</a>
      </p>
    </p>
   </div>
@@ -94,8 +109,8 @@
 {% endif %}
 </div>
 
-<div id="sub" class="sub">
-  <h3>Make a Pitch</h3>
+<div id="sub" class="sub m-auto border-bottom-success w-50">
+  <h3 class="text-center">Make a Pitch</h3>
 {{wtform.quick_form(form)}}
 
 </div>
