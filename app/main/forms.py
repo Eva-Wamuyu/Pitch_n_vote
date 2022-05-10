@@ -11,6 +11,7 @@ class LoginForm(FlaskForm):
   password = PasswordField('Password', validators=[DataRequired()])
   submit = SubmitField('Get In')
   
+  
 
 class SignupForm(FlaskForm):
   email = StringField('Email', validators=[DataRequired(),Email()])
@@ -33,3 +34,8 @@ class PostForm(FlaskForm):
   post = TextAreaField("What's in your mind?", validators=[DataRequired(), Length(min=15, message="Share a message longer than 15 characters")])
   category = RadioField("Category",choices=[("Tech","Technology"),("Agr","Agriculture"),("Edu","Education")], validators=[DataRequired()])
   submit = SubmitField('Share')
+
+
+class Comment(FlaskForm):
+  comment = TextAreaField("Remarks",validators=[DataRequired()])
+  submit = SubmitField('Post')
