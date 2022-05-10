@@ -25,8 +25,7 @@ def login():
   title = "PnV|SignUp"
   form_title = "Login"
   form = LoginForm()
-  if current_user.is_authenticated:
-      return redirect(url_for('.profile',user=current_user))
+  
  
   if form.validate_on_submit():
     user = User.query.filter_by(username= form.username.data).first()
@@ -36,6 +35,8 @@ def login():
 
       return redirect(url_for('.profile',user=person))
     flash('Username or Password not Valid')
+  if current_user.is_authenticated:
+      return redirect(url_for('.profile',user=current_user))
   return render_template("login.html",form=form,title=title, form_title=form_title)
 
 
@@ -51,7 +52,7 @@ def signUp():
     db.session.add(user)
     db.session.commit()
 
-    mail_message("Welcome","mail/welcome",user.email,user=user)
+    #mail_message("Welcome","mail/welcome",form.email.data,user=user)
     return redirect(url_for('.login',user=user.username))
   return render_template('signup.html',form=form,title=title, form_title=form_title)   
 
