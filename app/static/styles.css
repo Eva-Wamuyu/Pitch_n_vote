@@ -1,0 +1,37 @@
+
+
+
+
+#submit{
+  background-color: #05386B !important;
+  color: #fff !important;
+  margin-top: 7.5px;
+}
+
+h3{
+  color: #379683;
+}
+.help-block{
+  color: red;
+}
+.post-body{
+  width: clamp(375px,)
+}
+.body{
+  max-height: 95vh;
+  overflow: auto;
+}
+.page{
+  height: 95vh;
+  overflow: auto;
+}
+div.form{
+  width: clamp(375px,50%,475px);
+
+}
+textarea{
+  resize: none;
+}
+.posts{
+  color: #379683;
+}
