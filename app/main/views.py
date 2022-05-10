@@ -37,6 +37,7 @@ def login():
     flash('Username or Password not Valid')
   if current_user.is_authenticated:
       return redirect(url_for('.profile',user=current_user))
+
   return render_template("login.html",form=form,title=title, form_title=form_title)
 
 
@@ -51,9 +52,9 @@ def signUp():
     user = User(email=form.email.data, username=form.username.data, password=form.password.data)
     db.session.add(user)
     db.session.commit()
-
     #mail_message("Welcome","mail/welcome",form.email.data,user=user)
     return redirect(url_for('.login',user=user.username))
+    
   return render_template('signup.html',form=form,title=title, form_title=form_title)   
 
 
@@ -61,17 +62,21 @@ def signUp():
 @login_required
 def profile(user):
   
-  form = PostForm()
+  
   all_posts = Post.query.filter_by(author_id = current_user._id)
   title = "Profile"
+  return render_template('profile.html',title=title, posts=all_posts,user=current_user.username)
+
+@app_bp.route('/profile/pitch/', methods=["GET","POST"])
+@login_required
+def pitch():
+  form = PostForm()
   if form.validate_on_submit():
     post = Post(category=form.category.data, content=form.post.data, votes=0,author_id=current_user._id,the_date=date.today())
     db.session.add(post)
     db.session.commit()
-    redirect (url_for('.profile',user=current_user.username))
-  return render_template('profile.html',title=title, form=form, posts=all_posts,user=current_user.username)
-
-
+    return redirect (url_for('.profile',user=current_user.username))
+  return render_template('pitch.html',title="Pitch",form=form)
 
 
 @app_bp.route('/comment/<post>', methods=["GET","POST"])
@@ -139,6 +144,17 @@ def vote(post):
 def dvote(post):
   post_spec = Post.query.filter_by(_id=post).first()
   post_spec['votes'] = post_spec['votes'] -1;
+
+
+@app_bp.route("/acc")
+def acc():
+    title = "PnV|SignUp"
+    form_title = "Login"
+    form = LoginForm()
+    if current_user.is_authenticated:
+      return redirect(url_for('.profile',user=current_user))
+    return redirect(url_for('.login',user=current_user))
+
 # @app_bp.route("/comments/<a_post>")
 # def get_comments():
 #   title = "PnV|Comments"
