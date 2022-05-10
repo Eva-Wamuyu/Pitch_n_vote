@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
-{% import 'bootstrap/wtf.html' as wtform%}
-{% import 'macros.html' as macros%}
+
 
 
 {% block nav %}
@@ -14,7 +13,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="#sub">Pitch</a>
+        <a class="nav-link" href="{{url_for('app_bp.pitch')}}">Pitch</a>
         <a class="nav-link" href="{{url_for('app_bp.logout')}}">Logout</a>
         
       </div>
@@ -109,10 +108,6 @@
 {% endif %}
 </div>
 
-<div id="sub" class="sub m-auto border-bottom-success w-50">
-  <h3 class="text-center">Make a Pitch</h3>
-{{wtform.quick_form(form)}}
 
-</div>
 
 {% endblock %}
